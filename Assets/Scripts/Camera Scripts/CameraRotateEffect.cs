@@ -22,7 +22,7 @@ public class CameraRotateEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(pm.moving == true)
+        if (pm.moving == true && Input.GetKey(KeyCode.LeftShift))
         {
             Vector3 rot = new Vector3(0, 0, zVal);
             this.transform.eulerAngles = rot;

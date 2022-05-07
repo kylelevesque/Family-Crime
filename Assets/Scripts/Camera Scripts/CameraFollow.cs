@@ -23,7 +23,7 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.LeftControl))
+        if(Input.GetKey(KeyCode.F))
         {
             followPlayer = false;
             pm.SetMoving(false);
@@ -63,7 +63,7 @@ public class CameraFollow : MonoBehaviour
         Vector3 dir = camPos -= this.transform.position;
         
         //fix this. I want it to stop with player still in frame. Also get component call here is shit. 
-        if(target.GetComponent<SpriteRenderer>().isVisible == true)
+        if(target.GetComponentInChildren<SpriteRenderer>().isVisible == true)
         {
             transform.Translate(dir * lookAheadSpeed * Time.deltaTime);
         }

@@ -17,7 +17,7 @@ public class PlayerManager : MonoBehaviour
 
         if (playerStats.health <= 0)
         {
-            Debug.Log("Player Died");
+            ManageScenes.Instance.EnterStealthLevel();
         }
     }
 }

@@ -30,6 +30,7 @@ public class Loot : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             player.GetComponent<PlayerStats>().moneyInWallet += lootWorth;
+            MainManager.Instance.playerWallet += lootWorth;
 
             timeToDestroySelf = true;
         }

@@ -12,6 +12,7 @@ public class PlayerAttack : MonoBehaviour
     public LayerMask enemies;
 
 
+
     private void Start()
     {
         timeToAttack = attackTime;
@@ -26,12 +27,14 @@ public class PlayerAttack : MonoBehaviour
             {
                 Collider2D[] damage = Physics2D.OverlapCircleAll(attackLocation.position, attackRadius, enemies);
 
-                for (int i = 0; i <= damage.Length; i++)
+                if(damage.Length >= 1)
                 {
-                    Destroy(damage[i].gameObject);
+                    for (int i = 0; i <= damage.Length; i++)
+                    {
+                        Destroy(damage[i].gameObject);
+                        MainManager.Instance.playerKills++;
+                    }
                 }
-
-                Debug.Log("Attacked");
             }
             timeToAttack = attackTime;
         }
