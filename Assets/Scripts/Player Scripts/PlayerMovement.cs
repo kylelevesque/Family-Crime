@@ -128,11 +128,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if (toggle == 0)
         {
+            //is crouching
             playerSpriteRenderer.color = Color.gray;
+            GetComponent<PlayerManager>().PlayerIsCrouched(toggle);
         }
         else if(toggle == 1)
         {
+            //not crouching
             playerSpriteRenderer.color = Color.white;
+            GetComponent<PlayerManager>().PlayerIsCrouched(toggle);
         }
+
     }
 }

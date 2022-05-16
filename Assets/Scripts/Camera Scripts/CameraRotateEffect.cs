@@ -7,7 +7,8 @@ public class CameraRotateEffect : MonoBehaviour
     GameObject player;
     PlayerMovement pm;
 
-    float mod = 0.1f;
+    float mod = 0.12f;
+    float storeMod;
     float zVal = 0.0f;
 
     // Start is called before the first frame update
@@ -15,6 +16,7 @@ public class CameraRotateEffect : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         pm = player.GetComponent<PlayerMovement>();
+        storeMod = mod;
     }
 
 
@@ -35,8 +37,13 @@ public class CameraRotateEffect : MonoBehaviour
             }
             else if (transform.eulerAngles.z < 355.0f && transform.eulerAngles.z > 350.0f)
             {
-                mod = 0.1f;
+                mod = storeMod;
             }
+        }
+        else if(!Input.GetKey(KeyCode.LeftShift))
+        {
+            Vector3 rot = new Vector3(0, 0, 0);
+            this.transform.eulerAngles = rot;
         }
     }
 }

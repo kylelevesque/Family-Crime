@@ -25,15 +25,13 @@ public class PlayerAttack : MonoBehaviour
         {
             if(Input.GetButton("Fire1"))
             {
+                
                 Collider2D[] damage = Physics2D.OverlapCircleAll(attackLocation.position, attackRadius, enemies);
 
-                if(damage.Length >= 1)
+                if(damage.Length == 1)
                 {
-                    for (int i = 0; i <= damage.Length; i++)
-                    {
-                        Destroy(damage[i].gameObject);
-                        MainManager.Instance.playerKills++;
-                    }
+                    Destroy(damage[0].gameObject);
+                    MainManager.Instance.playerKills++;
                 }
             }
             timeToAttack = attackTime;

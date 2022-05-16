@@ -11,7 +11,8 @@ public class ExitLevel : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                ManageScenes.Instance.ExitStealthLevel();
+                MainManager.Instance.currentLevel++;
+                ManageScenes.Instance.ExitStealthLevel(MainManager.Instance.currentLevel);
             }
         }
     }

@@ -21,8 +21,7 @@ public class Guard : MonoBehaviour
     float viewAngle;
     Color originalSpotlightColor;
     float playerVisibleTimer;
-
-    bool playerSpotted;
+    float storeViewDistance;
 
     //access to player
     public Transform pathHolder;
@@ -50,7 +49,8 @@ public class Guard : MonoBehaviour
         transform.position = waypoints[0];
         targetWaypointIndex = 1;
 
-        playerSpotted = false;
+
+        storeViewDistance = viewDistance;
     }
 
 
@@ -59,13 +59,11 @@ public class Guard : MonoBehaviour
         if(CanSeePlayer())
         {
             playerVisibleTimer += Time.deltaTime;
-            playerSpotted = true;
         }
         else
         {
             playerVisibleTimer -= Time.deltaTime;
-            playerSpotted = false;
-
+           
             speed = patrolSpeed;
             Patrol(waypoints);
         }
@@ -89,6 +87,18 @@ public class Guard : MonoBehaviour
     //handles if Guard can See player - distance, angle, and linecast
     bool CanSeePlayer()
     {
+        bool isPlayerCrouched = CheckIfPlayerIsCrouching();
+        
+
+        if (isPlayerCrouched)
+        {
+            viewDistance = 2.5f;
+        }
+        else if(!isPlayerCrouched)
+        {
+            viewDistance = storeViewDistance;
+        }
+
         if (Vector3.Distance(transform.position, player.position) < viewDistance)
         {
             Vector3 dirToPlayer = (transform.position - player.position).normalized;
@@ -104,7 +114,6 @@ public class Guard : MonoBehaviour
         }
         return false;
     }
-
 
 
     //handles Guard movement
@@ -150,6 +159,11 @@ public class Guard : MonoBehaviour
             float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.z, targetAngle, turnSpeed * Time.deltaTime);
             transform.eulerAngles = new Vector3(0,0,1) * angle;
         }
+    }
+
+    bool CheckIfPlayerIsCrouching()
+    {
+        return player.GetComponent<PlayerManager>().isCrouched;
     }
 
     //gizmos for visualization

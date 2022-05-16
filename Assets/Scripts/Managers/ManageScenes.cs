@@ -21,17 +21,17 @@ public class ManageScenes : MonoBehaviour
 
     public void ToMainMenu()
     {
-        SceneManager.LoadScene(0);
+        ToLoadingScreen(0);
     }
 
-    public void ExitStealthLevel()
+    public void ExitStealthLevel(int day)
     {
-        SceneManager.LoadScene(1);
+        ToLoadingScreen(day);
     }
 
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
+        ToLoadingScreen(1);
     }
 
     public void ExitGame()
@@ -43,8 +43,15 @@ public class ManageScenes : MonoBehaviour
 #endif
     }
 
-    public void EnterStealthLevel()
+    public void EnterStealthLevel(int night)
     {
-        SceneManager.LoadScene(2);
+        ToLoadingScreen(night);
+    }
+
+    void ToLoadingScreen(int sceneIndexToLoad)
+    {
+        SceneManager.LoadScene("Loading");
+        Debug.Log("Hit Loading");
+        SceneManager.LoadSceneAsync(sceneIndexToLoad);
     }
 }

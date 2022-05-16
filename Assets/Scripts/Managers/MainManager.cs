@@ -6,7 +6,7 @@ public class MainManager : MonoBehaviour
 {
     public static MainManager Instance;
 
-
+    public int currentLevel;
     public float playerWallet;
     public float playerKills;
 

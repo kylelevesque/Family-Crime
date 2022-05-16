@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Loot : MonoBehaviour
 {
-    //temp solution
-    //replace with event
+
     GameObject player;
 
-    [SerializeField]
-    private int lootWorth;
+    [SerializeField] private int lootWorth;
+    [SerializeField] private AudioClip soundEffect;
 
     bool timeToDestroySelf = false;
 
@@ -31,6 +30,7 @@ public class Loot : MonoBehaviour
         {
             player.GetComponent<PlayerStats>().moneyInWallet += lootWorth;
             MainManager.Instance.playerWallet += lootWorth;
+            AudioManager.instance.PlaySound(soundEffect, transform.position);
 
             timeToDestroySelf = true;
         }
